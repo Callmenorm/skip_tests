@@ -8,7 +8,7 @@ defmodule SkipTests.Parse.Scheduler do
     end
 
     def init(state) do
-        set_timeout()
+        set_timeout(10_000)
         {:ok, state}
     end
 
@@ -63,7 +63,7 @@ defmodule SkipTests.Parse.Scheduler do
         end
     end
 
-    defp set_timeout() do
-        Process.send_after(self(), :check, 1000 * 60 * 5) # send :check after 5 minutes
+    defp set_timeout(timeout \\ 1000 * 60 * 5) do
+        Process.send_after(self(), :check, timeout) # send :check after 5 minutes
     end
 end
